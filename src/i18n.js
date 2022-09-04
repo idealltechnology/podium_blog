@@ -17,14 +17,10 @@ const resources = {
   }
 };
 
-i18n
+i18n.use(LanguageDetector).use(initReactI18next).init({
+  resources,
 
-  .use(LanguageDetector)
-  .use(initReactI18next)
-  .init({
-    resources,
-
-    debug: false
-  });
+  debug: false
+});
 
 export default i18n;
