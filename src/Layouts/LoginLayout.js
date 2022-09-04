@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Login from '../Components/Login';
 import '../Components/login.css';
-import LanguageSelector from '../Components/LanguageSelection';
+import LanguageSelection from '../Components/LanguageSelection';
 
 const LoginLayout = () => {
   return (
@@ -11,12 +11,12 @@ const LoginLayout = () => {
         <Row>
           <Col md={12} className="my-4">
             <Row>
-              <LanguageSelector />
+              <LanguageSelection />
             </Row>
           </Col>
         </Row>
       </Container>
-      <Container className="  my-3  login-container">
+      <Container className="my-3  login-container">
         <Row className=" loginBoxContainer">
           <Col>
             <Login />

@@ -67,3 +67,13 @@ body {
   border: 1px solid #ced4da;
   border-radius: 0.375rem;
 }
+.changeLanguageButtonStyle {
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+}
+.changeLanguageButtonItemStyle {
+  margin: 5px;
+  color: #fff;
+  border: none;
+}

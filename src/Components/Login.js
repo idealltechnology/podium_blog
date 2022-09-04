@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 import {
   Link,
+  NavLink,
   BrowserRouter as Router
 } from 'react-router-dom';
 import axios from 'axios';
@@ -18,7 +19,7 @@ const Login = ({ setUserState }) => {
     password: ''
   });
   const { t } = useTranslation();
-  const changeHandler = e => {
+  const changeHandler = (e) => {
     const { name, value } = e.target;
     setUserDetails({
       ...user,
@@ -26,7 +27,7 @@ const Login = ({ setUserState }) => {
     });
   };
 
-  const validateForm = values => {
+  const validateForm = (values) => {
     const error = {};
     const regex = /^[^\s+@]+@[^\s@]+\.[^\s@]{2,}$/i;
     if (!values.email) {
@@ -40,7 +41,7 @@ const Login = ({ setUserState }) => {
     return error;
   };
 
-  const loginHandler = e => {
+  const loginHandler = (e) => {
     e.preventDefault();
     setFormErrors(validateForm(user));
     setIsSubmit(true);
@@ -50,7 +51,7 @@ const Login = ({ setUserState }) => {
       console.log(user);
       axios
         .post('http://localhost:9002/login', user)
-        .then(res => {
+        .then((res) => {
           alert(res.data.message);
           setUserState(res.data.user);
         });
@@ -69,11 +70,11 @@ const Login = ({ setUserState }) => {
           <span>{t('login.label')}</span>
         </div>
         <Form className="px-5 ">
-          <Form.Group
-            className="mb-3"
-            controlId="formBasicEmail"
-          >
-            <Form.Label className="component-label">
+          <Form.Group className="mb-3">
+            <Form.Label
+              htmlFor="email"
+              className="component-label"
+            >
               {t('Email.label')}
             </Form.Label>
             <Form.Control
@@ -87,7 +88,10 @@ const Login = ({ setUserState }) => {
             <p className="">{formErrors.email}</p>
           </Form.Group>
           <Form.Group>
-            <Form.Label className="component-label">
+            <Form.Label
+              htmlFor="password"
+              className="component-label"
+            >
               {t('password.label')}
             </Form.Label>
             <Form.Control
@@ -111,9 +115,9 @@ const Login = ({ setUserState }) => {
           <div className="buttonContainerLight clickAbleButton">
             <span className=" buttonLightText component-label text-center ">
               <Router>
-                <Link to="/forgetPass">
+                <NavLink to="/forgetPass">
                   {t('ForgetPassword.label')}
-                </Link>
+                </NavLink>
               </Router>
             </span>
           </div>
