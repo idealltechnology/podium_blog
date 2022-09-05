@@ -7,6 +7,9 @@
   "password.label": "كلمة المرور",
 
   "signIn.label": "تسجیل الدخول",
+  "sendCode.label": "ارسل الرابط",
+  "backToLogin.label": "العود الی صفحه تسجیل الدخول",
 
-  "ForgetPassword.label": "نسیت کلمه المرور?"
+  "ForgetPassword.label": "نسیت کلمه المرور?",
+  "ForgetPassword.body": "لاتقلق,فقط ادخل بريدك الالكتروني و سوف نرسل لك رابط لتغير كلمة المرور"
 }

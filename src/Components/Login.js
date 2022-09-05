@@ -3,15 +3,9 @@ import { Form, Container } from 'react-bootstrap';
 import '../styles/text.css';
 import loginLogo from '../images/logo.png';
 import { useTranslation } from 'react-i18next';
-
-import {
-  Link,
-  NavLink,
-  BrowserRouter as Router
-} from 'react-router-dom';
 import axios from 'axios';
 
-const Login = ({ setUserState }) => {
+const Login = ({ setUserState, onForgotPassWord }) => {
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
   const [user, setUserDetails] = useState({
@@ -114,11 +108,14 @@ const Login = ({ setUserState }) => {
           </div>
           <div className="buttonContainerLight clickAbleButton">
             <span className=" buttonLightText component-label text-center ">
-              <Router>
-                <NavLink to="/forgetPass">
-                  {t('ForgetPassword.label')}
-                </NavLink>
-              </Router>
+              <a
+                href="#"
+                onClick={() => {
+                  onForgotPassWord(true);
+                }}
+              >
+                {t('ForgetPassword.label')}
+              </a>
             </span>
           </div>
         </Form>

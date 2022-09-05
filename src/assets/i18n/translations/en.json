@@ -7,6 +7,9 @@
   "password.label": "Password",
 
   "signIn.label": "Sign In",
+  "sendCode.label": "Send Code",
+  "backToLogin.label": "Back To Login",
 
-  "ForgetPassword.label": "Forget Your Password?"
+  "ForgetPassword.label": "Forget Your Password?",
+  "ForgetPassword.body": "Enter your email address and we will send a link to reset your password"
 }
