@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Container } from 'react-bootstrap';
+import { Form, Container, Button } from 'react-bootstrap';
 import '../styles/text.css';
 import loginLogo from '../images/logo.png';
 import { useTranslation } from 'react-i18next';
@@ -12,6 +12,8 @@ const Login = ({ setUserState, onForgotPassWord }) => {
     email: '',
     password: ''
   });
+  const [disable, setDisable] = useState(true);
+
   const { t } = useTranslation();
   const changeHandler = (e) => {
     const { name, value } = e.target;
@@ -41,16 +43,25 @@ const Login = ({ setUserState, onForgotPassWord }) => {
     setIsSubmit(true);
   };
   useEffect(() => {
+    if (user.email && user.password) {
+      setDisable(false);
+    } else {
+      setDisable(true);
+    }
+
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       console.log(user);
       axios
-        .post('http://localhost:9002/login', user)
-        .then((res) => {
-          alert(res.data.message);
-          setUserState(res.data.user);
+        .post('anyURL', user)
+        .then((response) => {
+          console.log(response.data.message);
+          setUserState(response.data.user);
+        })
+        .catch((error) => {
+          console.log(error);
         });
     }
-  }, [formErrors]);
+  }, [formErrors, isSubmit, setUserState, user]);
   return (
     <div className="font-face-pl">
       <Container className="my-3  ">
@@ -98,14 +109,13 @@ const Login = ({ setUserState, onForgotPassWord }) => {
             />
             <p className="">{formErrors.password}</p>
           </Form.Group>
-          <div
+          <Button
+            disabled={disable}
             className="buttonContainerPrimary clickAbleButton"
             onClick={loginHandler}
           >
-            <span className="buttonPrimaryText">
-              {t('signIn.label')}
-            </span>
-          </div>
+            {t('signIn.label')}
+          </Button>
           <div className="buttonContainerLight clickAbleButton">
             <span className=" buttonLightText component-label text-center ">
               <a

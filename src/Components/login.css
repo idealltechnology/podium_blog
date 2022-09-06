@@ -30,7 +30,7 @@ body {
   margin-top: 22px;
 }
 .buttonContainerPrimary {
-  background: #0000f9 0 0 no-repeat padding-box;
+  background: #0000f9 0 0 no-repeat padding-box !important;
   width: 384px;
   height: 48px;
   border-radius: 8px;
@@ -76,4 +76,9 @@ body {
   margin: 5px;
   color: #fff;
   border: none;
+}
+.buttonContainerPrimary:disabled {
+  background-color: #f4f4f6 !important;
+  border: none !important;
+  color: #4b4b5e !important;
 }
