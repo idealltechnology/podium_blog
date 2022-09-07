@@ -4,6 +4,7 @@ import '../styles/text.css';
 import loginLogo from '../images/logo.png';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
 
 const Login = ({ setUserState, onForgotPassWord }) => {
   const [formErrors, setFormErrors] = useState({});
@@ -56,9 +57,11 @@ const Login = ({ setUserState, onForgotPassWord }) => {
         .then((response) => {
           console.log(response.data.message);
           setUserState(response.data.user);
+          toast.success('Success!');
         })
         .catch((error) => {
           console.log(error);
+          toast.error('username or password is incorrect!');
         });
     }
   }, [formErrors, isSubmit, setUserState, user]);
