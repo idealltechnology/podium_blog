@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Container } from 'react-bootstrap';
+import { Form, Container, Button } from 'react-bootstrap';
 import '../styles/text.css';
 import loginLogo from '../images/logo.png';
 import { useTranslation } from 'react-i18next';
@@ -12,7 +12,8 @@ const ForgetPassword = ({ onForgotPassWord }) => {
   const [user, setUserDetails] = useState({
     email: ''
   });
-  const ChangePassHandler = (e) => {
+  const [disable, setDisable] = useState(true);
+  const ChangePasswordHandler = (e) => {
     e.preventDefault();
     setUserDetails(e.target.value);
   };
@@ -47,18 +48,18 @@ const ForgetPassword = ({ onForgotPassWord }) => {
               name="email"
               id="email"
               placeholder="Yourname@example.com"
+              onChange={() => setDisable(false)}
             />
           </Form.Group>
-          <div
+          <Button
+            disabled={disable}
             className="buttonContainerPrimary clickAbleButton"
-            onClick={ChangePassHandler}
+            onClick={ChangePasswordHandler}
           >
-            <span className="buttonPrimaryText">
-              {t('sendCode.label')}
-            </span>
-          </div>
-          <div className="buttonContainerLight clickAbleButton">
-            <span className=" buttonLightText component-label text-center ">
+            {t('sendCode.label')}
+          </Button>
+          <div className="buttonContainerLight clickAbleButton text-center">
+            <span className=" buttonLightText component-label  ">
               <a
                 href="#"
                 onClick={() => {

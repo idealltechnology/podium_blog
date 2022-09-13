@@ -11,6 +11,7 @@ import './fonts/Poppins-SemiBold.ttf';
 import './i18n';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AuthProvider from './context/AuthProvider';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root')
@@ -28,7 +29,9 @@ root.render(
       draggable
       pauseOnHover
     />
-    <App />
+    <AuthProvider>
+      <App />
+    </AuthProvider>
   </React.StrictMode>
 );
 
