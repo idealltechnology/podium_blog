@@ -4,85 +4,83 @@ import React, {
   useRef,
   useContext
 } from 'react';
-import AuthContext from '../context/AuthContext';
-import { Form, Container, Button } from 'react-bootstrap';
-import '../styles/text.css';
-import loginLogo from '../images/logo.png';
+import AuthContext from '../../Context/AuthContext';
+import {
+  Form,
+  Container,
+  Button,
+  Alert
+} from 'react-bootstrap';
+import '../../styles/text.css';
+import '../Login/login.css';
+import { useNavigate } from 'react-router-dom';
+
 import { useTranslation } from 'react-i18next';
-import axios from '../api/axios';
-import { toast } from 'react-toastify';
-const LOGIN_URL = './auth';
+import useXHR from '../../Hook/xhr';
 
 const Login = ({ onForgotPassWord }) => {
   const userRef = useRef();
-  const { setAuth } = useContext(AuthContext);
-  const [formErrors, setFormErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
-  const [user, setUser] = useState('');
-  const [password, setPassword] = useState('');
-  const [disable, setDisable] = useState(true);
-  const [success, setSuccess] = useState(false);
 
+  const [item, setItem] = useState({
+    email: '',
+    password: ''
+  });
+  const [loading, error, send] = useXHR();
+  const { setAuth } = useContext(AuthContext);
+  const [disable, setDisable] = useState(true);
   const { t } = useTranslation();
   useEffect(() => {
     userRef.current.focus();
   }, []);
+  const changeHandler = (e) => {
+    setItem({ ...item, [e.target.name]: e.target.value });
+  };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post(
-        'http://195.248.240.174:8001/auth/login',
-        JSON.stringify({ email: user, password }),
-        {
-          headers: {
-            'Content-Type': 'application/json'
-          }
+    send(
+      {
+        url: 'auth/login',
+        method: 'POST',
+
+        data: {
+          email: item.email,
+          password: item.password
         }
-      );
-
-      console.log(JSON.stringify(response));
-      console.log(JSON.stringify(response?.data));
-      const accessToken = response?.data?.accessToken;
-
-      setAuth(user, password, accessToken);
-      setUser('');
-      setPassword('');
-      setSuccess(true);
-      toast.success('Hazard');
-    } catch (err) {
-      if (!err?.response) {
-        toast.error('No Server Response');
-      } else if (err.response?.status === 400) {
-        toast.error('Missing username or password');
-      } else if (err.response?.status === 401) {
-        toast.error('Unauthorized');
-      } else {
-        toast.error('Login Failed');
+      },
+      (response) => {
+        if (response?.data) {
+          setAuth(response.data.item);
+        }
       }
-    }
+    );
   };
 
   useEffect(() => {
-    if (user && password) {
+    if (item.email && item.password) {
       setDisable(false);
     } else {
       setDisable(true);
     }
-  }, [formErrors, isSubmit, user, password]);
+  }, [item.email, item.password]);
 
   return (
     <div className="font-face-pl">
       <Container className="my-3  ">
         <div className="mt-5 text-center">
           <span>
-            <img src={loginLogo} alt="loginLogo"></img>
+            <img
+              className="Header-logo"
+              src="../../images/logo.png"
+              alt="Logo"
+            />
           </span>
         </div>
         <div className="component-header text-center ">
           {' '}
           <span>{t('login.label')}</span>
         </div>
+        {error && <Alert variant={'danger'}>{error}</Alert>}
         <form className="px-5" onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
             <Form.Label
@@ -92,16 +90,15 @@ const Login = ({ onForgotPassWord }) => {
               {t('Email.label')}
             </Form.Label>
             <Form.Control
-              type="email"
-              name="email"
+              type={'email'}
+              name={'email'}
               id="email"
               ref={userRef}
-              placeholder="Yourname@example.com"
+              placeholder={'Yourname@example.com'}
               autoComplete="off"
-              onChange={(e) => setUser(e.target.value)}
-              value={user}
+              onChange={changeHandler}
+              value={item.email}
             />
-            <p className="">{formErrors.email}</p>
           </Form.Group>
           <Form.Group>
             <Form.Label
@@ -115,10 +112,9 @@ const Login = ({ onForgotPassWord }) => {
               name="password"
               id="password"
               placeholder={t('password.label')}
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
+              onChange={changeHandler}
+              value={item.password}
             />
-            <p className="">{formErrors.password}</p>
           </Form.Group>
           <Button
             disabled={disable}

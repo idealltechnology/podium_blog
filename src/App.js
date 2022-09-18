@@ -1,5 +1,5 @@
 import './App.css';
-import Loginlayout from './Layouts/LoginLayout';
+import Loginlayout from './Layouts/AuthLayout/Body';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 

@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
-import FlagIcon from './FlagIcon';
+import FlagIcon from '../../../Components/FlagIcon';
 import './LanguageSelection.css';
 
 const languageMap = {

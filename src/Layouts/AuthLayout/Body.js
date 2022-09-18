@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import Login from '../Components/Login';
-import ForgetPassword from '../Components/ForgetPassword';
-import '../Components/login.css';
-import LanguageSelection from '../Components/LanguageSelection';
+import Login from '../../Features/Login/Login';
+import ForgetPassword from '../../Features/ForgetPassword/ForgetPassword';
+import LanguageSelection from '../../Layouts/AuthLayout/Header/LanguageSelection';
 
 const LoginLayout = () => {
   const [forgotPassword, setForgotPassword] =

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Container, Button } from 'react-bootstrap';
-import '../styles/text.css';
-import loginLogo from '../images/logo.png';
+import '../../styles/text.css';
+
 import { useTranslation } from 'react-i18next';
 import {
   NavLink,
@@ -23,7 +23,11 @@ const ForgetPassword = ({ onForgotPassWord }) => {
       <Container className="my-3  ">
         <div className="mt-5 text-center">
           <span>
-            <img src={loginLogo} alt="loginLogo"></img>
+            <img
+              className="Header-logo"
+              src="../../images/logo.png"
+              alt="Logo"
+            />
           </span>
         </div>
         <div className=" text-center ">

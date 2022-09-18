@@ -11,7 +11,7 @@ import './fonts/Poppins-SemiBold.ttf';
 import './i18n';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import AuthProvider from './context/AuthProvider';
+import AuthProvider from '../src/Context/AuthProvider';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root')
