@@ -7,14 +7,12 @@ import './LanguageSelection.css';
 const languageMap = {
   en: {
     label: 'English',
-    dir: 'ltr',
     key: 1,
     active: true,
     countryCode: 'us'
   },
   ar: {
     label: 'العربية',
-    dir: 'rtl',
     key: 2,
     active: false,
     countryCode: 'sa'
@@ -23,12 +21,14 @@ const languageMap = {
 
 const LanguageSelection = (props) => {
   const { i18n } = useTranslation();
+
   document.body.dir = i18n.dir();
   const [isOpen, setIsOpen] = useState(false);
   const [language, setLanguage] = useState('English');
   const handleLangChange = (lang) => {
     setLanguage(lang);
     i18n.changeLanguage(lang);
+    console.log(i18n.changeLanguage(lang));
   };
   const renderLanguage = (item) => {
     return (

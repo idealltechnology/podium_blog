@@ -3,10 +3,7 @@ import { Form, Container, Button } from 'react-bootstrap';
 import '../../styles/text.css';
 
 import { useTranslation } from 'react-i18next';
-import {
-  NavLink,
-  BrowserRouter as Router
-} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const ForgetPassword = ({ onForgotPassWord }) => {
   const [user, setUserDetails] = useState({
@@ -64,14 +61,14 @@ const ForgetPassword = ({ onForgotPassWord }) => {
           </Button>
           <div className="buttonContainerLight clickAbleButton text-center">
             <span className=" buttonLightText component-label  ">
-              <a
-                href="#"
+              <Link
                 onClick={() => {
                   onForgotPassWord(false);
                 }}
+                to={'/Login'}
               >
                 {t('backToLogin.label')}
-              </a>
+              </Link>
             </span>
           </div>
         </Form>

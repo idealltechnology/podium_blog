@@ -6,7 +6,7 @@ import translationEN from './assets/i18n/translations/en.json';
 import translationAR from './assets/i18n/translations/ar.json';
 
 const fallbackLng = ['en'];
-const availableLanguages = ['en', 'ar'];
+const availableLanguages = ['en', 'arab'];
 
 const resources = {
   en: {

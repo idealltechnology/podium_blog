@@ -13,7 +13,15 @@ import {
 } from 'react-bootstrap';
 import '../../styles/text.css';
 import '../Login/login.css';
-import { useNavigate } from 'react-router-dom';
+import {
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+  useLocation,
+  Navigate,
+  Outlet
+} from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
 import useXHR from '../../Hook/xhr';
@@ -127,14 +135,14 @@ const Login = ({ onForgotPassWord }) => {
         <div className="buttonContainerLight clickAbleButton">
           <span className=" buttonLightText component-label text-center ">
             {/* put router link here */}
-            <a
-              href="#"
+            <Link
               onClick={() => {
                 onForgotPassWord(true);
               }}
+              to={'/ForgetPassword'}
             >
               {t('ForgetPassword.label')}
-            </a>
+            </Link>
           </span>
         </div>
       </Container>

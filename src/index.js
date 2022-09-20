@@ -12,6 +12,11 @@ import './i18n';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AuthProvider from '../src/Context/AuthProvider';
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from 'react-router-dom';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root')
@@ -29,9 +34,11 @@ root.render(
       draggable
       pauseOnHover
     />
-    <AuthProvider>
-      <App />
-    </AuthProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
