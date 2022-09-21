@@ -9,32 +9,25 @@ import {
   Form,
   Container,
   Button,
-  Alert
+  Alert,
+  Spinner
 } from 'react-bootstrap';
 import '../../styles/text.css';
 import '../Login/login.css';
-import {
-  Routes,
-  Route,
-  Link,
-  useNavigate,
-  useLocation,
-  Navigate,
-  Outlet
-} from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import useXHR from '../../Hook/xhr';
 
 const Login = ({ onForgotPassWord }) => {
   const userRef = useRef();
+  let navigate = useNavigate();
 
   const [item, setItem] = useState({
     email: '',
     password: ''
   });
   const [loading, error, send] = useXHR();
-  const { setAuth } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [disable, setDisable] = useState(true);
   const { t } = useTranslation();
   useEffect(() => {
@@ -58,11 +51,16 @@ const Login = ({ onForgotPassWord }) => {
       },
       (response) => {
         if (response?.data) {
-          setAuth(response.data.item);
+          user(response.data.item);
         }
       }
     );
   };
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [navigate, user]);
 
   useEffect(() => {
     if (item.email && item.password) {
@@ -70,7 +68,7 @@ const Login = ({ onForgotPassWord }) => {
     } else {
       setDisable(true);
     }
-  }, [item.email, item.password]);
+  }, [item.email, item.password, loading]);
 
   return (
     <div className="font-face-pl">
@@ -125,16 +123,27 @@ const Login = ({ onForgotPassWord }) => {
             />
           </Form.Group>
           <Button
-            disabled={disable}
+            disabled={loading || disable}
             type="submit"
             className="buttonContainerPrimary clickAbleButton"
           >
             {t('signIn.label')}
+            {loading ? (
+              <Spinner
+                as="span"
+                variant="light"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+                animation="border"
+              />
+            ) : (
+              ''
+            )}{' '}
           </Button>
         </form>
         <div className="buttonContainerLight clickAbleButton">
           <span className=" buttonLightText component-label text-center ">
-            {/* put router link here */}
             <Link
               onClick={() => {
                 onForgotPassWord(true);

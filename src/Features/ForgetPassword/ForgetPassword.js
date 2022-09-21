@@ -36,7 +36,10 @@ const ForgetPassword = ({ onForgotPassWord }) => {
             {t('ForgetPassword.body')}
           </div>
         </div>
-        <Form className="px-5 ">
+        <Form
+          className="px-5 "
+          onSubmit={ChangePasswordHandler}
+        >
           <Form.Group className="mb-3">
             <Form.Label
               htmlFor="email"
@@ -55,7 +58,6 @@ const ForgetPassword = ({ onForgotPassWord }) => {
           <Button
             disabled={disable}
             className="buttonContainerPrimary clickAbleButton"
-            onClick={ChangePasswordHandler}
           >
             {t('sendCode.label')}
           </Button>
